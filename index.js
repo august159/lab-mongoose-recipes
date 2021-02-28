@@ -15,9 +15,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((self) => {
-    console.log(
-      `Iteration 1: Connected to the database: "${self.connection.name}"`
-    );
+    console.log(`Connected to the database: "${self.connection.name}"`);
     // Before adding any documents to the database, let's delete all previous entries
     return self.connection.dropDatabase();
   })
@@ -45,14 +43,8 @@ mongoose
     });
     return recipe;
   })
-  .then((recipe) => {
-    console.log(recipe.title);
-  })
   .then(() => {
     const recipesArray = Recipe.insertMany(data);
-    return recipesArray;
-  })
-  .then((recipesArray) => {
     recipesArray.forEach((oneRecipe) => {
       console.log(oneRecipe.title);
     });
@@ -63,16 +55,10 @@ mongoose
       { duration: 100 },
       { new: true }
     );
-    return updatedRecipe;
-  })
-  .then((updatedRecipe) => {
     console.log(updatedRecipe.duration);
   })
   .then(() => {
     const removedRecipe = Recipe.deleteOne({ title: "Carrot Cake" });
-    return removedRecipe;
-  })
-  .then((removedRecipe) => {
     console.log(removedRecipe);
   })
   .catch((error) => {
